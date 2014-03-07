@@ -1,0 +1,10 @@
+activities
+==========
+
+* Capture (separate module)
+ |-> focus, compression, quality control
+
+* Encoding (workflow activity): coding.py
+ |-> iris_detection.py, feature_detection.py
+
+* Matching (workflow activity): matching.py
