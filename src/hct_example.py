@@ -17,7 +17,11 @@ import numpy as np
 
 CH = hct.CircularHough()
 
-raw_image = plt.imread("../working-db/003R_3.png")
+#raw_image = plt.imread("../working-db/test.png")
+raw_image = plt.imread("../working-db/003L_3.png")
+raw_image = raw_image[:,:,0] # get the first channel
+print "[DEBUG] Image shape is: " + str(raw_image.shape)
+
 accumulator, radii = CH(raw_image, radii=np.arange(70,95,3), threshold=0.01, binary=True, method='fft')
 
 maxima = []
