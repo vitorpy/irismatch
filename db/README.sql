@@ -1,13 +1,13 @@
 Liberally inspired from author previous experience with Dermalog AFIS products.
 
-All hail to the Dermalog guys, 'cuz they rock.
+All hail to the Dermalog guys, because they rocks.
 
 Brief description:
 
 -- Workflow namespace
 
 * Workflow.Items
- |-> ItemId, Activity, Creation Timestamp, State (FK)
+ |-> ItemId, Activity, State (FK)
 
 * Workflow.Attributes
  |-> ItemId (FK), Name, Value
