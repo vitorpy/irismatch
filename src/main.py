@@ -1,7 +1,15 @@
 #!/usr/bin/env python2.7
 
 from PIL import Image
+from iris_detection import detect_iris
 
-im = Image.open("../working-db/003R_3.png")
-im.show()
+def show(filename):
+    im = Image.open(filename)
+    im.show()
+
+if __name__ == '__main__':
+    filename = "../working-db/003R_3.png"
+    show(filename)
+    detect_iris(filename)
+    
 
