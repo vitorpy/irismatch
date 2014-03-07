@@ -7,7 +7,7 @@ Functionaly:
 
 Notes:
 
-** Extract zip files from 'db' directory to 'working-db'. 'working-db' is ignored by git and contains uncompressed and temporary files.
+** Extract zip files from 'img-db' directory to 'working-db'. 'working-db' is ignored by git and contains uncompressed and temporary files.
 
 License:
 
