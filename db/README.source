@@ -1,0 +1,10 @@
+Source: http://phoenix.inf.upol.cz/iris/
+
+------------
+
+The database contains 3 x 128 iris images (i.e. 3 x 64 left and 3 x 64 right).
+The images are: 24 bit - RGB, 576 x 768 pixels, file format: PNG.
+The irises were scanned by TOPCON TRC50IA optical device connected with SONY DXC-950P 3CCD camera.
+
+If the database or images are used for evaluation and if published it should be stated in references:
+Michal Dobe¹ and Libor Machala, Iris Database, http://www.inf.upol.cz/iris/ 
