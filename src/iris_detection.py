@@ -22,8 +22,9 @@ def detect_iris(filename):
     raw_image = raw_image[:,:,0] # get the first channel
     print "[DEBUG] Image shape is: " + str(raw_image.shape)
 
-    accumulator, radii = CH(raw_image, radii=np.arange(70,95,3), threshold=0.01, binary=True, method='fft')
+    accumulator, radii = CH(raw_image, radii=np.arange(70, 95, 3), threshold=0.01, binary=True, method='fft')
 
+    """
     maxima = []
     max_positions = []
     for i, r in enumerate(radii):
@@ -31,13 +32,13 @@ def detect_iris(filename):
         maxima.append(accumulator[i].max())
         print "Maximum signal for radius %d: %d %s" % (r, maxima[i], max_positions[i])
 
-    #   Identify maximum:
+    # Identify maximum:
     max_index = np.unravel_index(accumulator.argmax(), accumulator.shape)
 
     print "Maximum correlation found for radius %d at position (%d, %d)." % \
           (radii[max_index[0]], max_index[2], max_index[1])
 
-    #   Make a fancy figure:
+    # Make a fancy figure:
     fig = plt.figure(1)
     fig.clf()
     subplots = []
@@ -46,23 +47,27 @@ def detect_iris(filename):
         plt.imshow(accumulator[n, :, :])
         plt.title('Radius: %d, Signal: %s' % (radii[n], accumulator[n].max()))
 
-    #   Add original to figure:
+    # Add original to figure:
     subplots.append(fig.add_subplot(339))
-
-    print "[DEBUG] Going thru .imshow"
+    """
+    
+    print "[DEBUG] Calling imshow"
     plt.imshow(raw_image)
-    #print "[DEBUG] Back to code"
 
     plt.title('Raw image (inverted)')
 
-    #   Add appropriate circular patch to figure (thanks to MZ!):
-    dr = radii[1] - radii[0]
-    blob_circ = plt_patches.Circle((max_index[2],max_index[1]),radii[max_index[0]], fill=False, lw=dr, ec='red')
-    #self.selection_circ.get_axes()
-    #self.selection_circ.get_transform()
-    plt.gca().add_patch(blob_circ)
-
-    #   Fix axis distortion:
+    # Add appropriate circular patch to figure (thanks to MZ!):
+    for i, r in enumerate(radii):
+        # [Vitor] where i is the accumulator index and r is the radius
+        # accumulator a list of points
+        point = np.unravel_index(accumulator[i].argmax(), accumulator[i].shape)
+        try:
+            blob_circ = plt_patches.Circle((point[1], point[0]), r, fill=False, ec='red')
+            plt.gca().add_patch(blob_circ)
+        except ValueError:
+            print point, r
+            continue
+    # Fix axis distortion:
     plt.axis('image')
 
     plt.show()

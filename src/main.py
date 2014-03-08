@@ -8,8 +8,9 @@ def show(filename):
     im.show()
 
 if __name__ == '__main__':
+    print "[*] irismatch Enconding"
     filename = "../working-db/003R_3.png"
-    show(filename)
+    #show(filename)
     detect_iris(filename)
     
 
