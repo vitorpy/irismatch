@@ -107,8 +107,8 @@ class CircularHough(object):
             application relies on having pre-processed the image approrpiately,
             removing noise through smoothing and thresholding. Usually slow."""
 
-        print "Using explicit method..."
-        warn("Warning! This is probably slower than 'fft'!")
+        print "[*] Using explicit method..."
+        warn("[WARN] This is probably slower than 'fft'!")
 
         radii = self.radii
         r_max = radii.max()
@@ -128,7 +128,7 @@ class CircularHough(object):
             more efficient if the data hasn't been sufficiently smoothed and 
             otherwise pre-processed... """
 
-        print "Using fft-method..."
+        print "[*} Using fft-method..."
 
         radii = self.radii
         acc = np.zeros( (radii.size, image.shape[0], image.shape[1]) )
@@ -143,7 +143,7 @@ class CircularHough(object):
         """ Returns a circular kernel/stencil with the specified radius. """
 
         if w > r:
-            print "Dude! Width of annulus can't be > radius! (Using r...)"
+            print "[ERROR] Dude! Width of annulus can't be > radius! (Using r...)"
             w = r
 
         grids = np.mgrid[-r:r+1, -r:r+1]
@@ -160,19 +160,19 @@ class CircularHough(object):
             pre-processing. """
 
         if edge_filter.lower() == "sobel":
-            print "Using Sobel-filter for edge detection."
+            print "[*] Using Sobel-filter for edge detection."
             image = filters.sobel(image, 0)**2 + filters.sobel(image, 1)**2 
         elif edge_filter.lower() == "canny":
-            print "Using Canny-filter for edge detection."
-            print "Actually... no... Couldn't find it." # use warn..?
+            print "[*] Using Canny-filter for edge detection."
+            warn("[WARN] Actually... no... Couldn't find it.")
             #image = filters.canny(image)
-            print "Using Sobel-filter for edge detection.!"
+            print "[*] Using Sobel-filter for edge detection."
             image = filters.sobel(image, 0)**2 + filters.sobel(image, 1)**2 
         elif edge_filter is None:
-            print "I sure hope you've done your own edge detection..."
+            print "[*] I sure hope you've done your own edge detection..."
         else:
-            print "Unknonw option:", edge_filter, "Try: 'sobel', 'canny' or None!"
-            print "I sure hope you've done your own edge detection..."
+            print "[ERROR] Unknonw option:", edge_filter, "Try: 'sobel', 'canny' or None!"
+            print "[*] I sure hope you've done your own edge detection..."
 
         image -= image.min()
 
