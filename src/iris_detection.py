@@ -22,34 +22,11 @@ def detect_iris(filename):
     raw_image = raw_image[:,:,0] # get the first channel
     print "[DEBUG] Image shape is: " + str(raw_image.shape)
 
-    accumulator, radii = CH(raw_image, radii=np.arange(70, 95, 3), threshold=0.01, binary=True, method='fft')
-
-    """
-    maxima = []
-    max_positions = []
-    for i, r in enumerate(radii):
-        max_positions.append(np.unravel_index(accumulator[i].argmax(), accumulator[i].shape))
-        maxima.append(accumulator[i].max())
-        print "Maximum signal for radius %d: %d %s" % (r, maxima[i], max_positions[i])
-
-    # Identify maximum:
-    max_index = np.unravel_index(accumulator.argmax(), accumulator.shape)
-
-    print "Maximum correlation found for radius %d at position (%d, %d)." % \
-          (radii[max_index[0]], max_index[2], max_index[1])
-
-    # Make a fancy figure:
-    fig = plt.figure(1)
-    fig.clf()
-    subplots = []
-    for n in xrange(8):
-        subplots.append(fig.add_subplot(3, 3, n+1))
-        plt.imshow(accumulator[n, :, :])
-        plt.title('Radius: %d, Signal: %s' % (radii[n], accumulator[n].max()))
-
-    # Add original to figure:
-    subplots.append(fig.add_subplot(339))
-    """
+    min_size = min(raw_image.shape)
+    # 0.1 to 0.8 from Daugman paper
+    lower_bound = int(0.1 * min_size) / 2
+    upper_bound = int(0.8 * min_size) / 2
+    accumulator, radii = CH(raw_image, radii=np.arange(lower_bound, upper_bound, 3), threshold=0.01, binary=True, method='fft')
     
     print "[DEBUG] Calling imshow"
     plt.imshow(raw_image)
