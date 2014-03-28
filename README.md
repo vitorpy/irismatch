@@ -17,4 +17,4 @@ License:
 
 Author:
 
-** Vitor Braga (vitorpybraga@gmail.com)
+** Vitor Braga
